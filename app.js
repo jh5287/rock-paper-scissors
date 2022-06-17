@@ -20,11 +20,23 @@ function playerInitial(){
     }
     return playerSelection;
 }
-//const playerSelection = "rock";
-//const computerSelection = computerPlay();
+
+function determineWinner(player, comp) {
+    if ( (player == "rock" && comp == "paper") || (player == "paper" && comp == "scissor") || (player == "scissor" && comp == "rock")){
+        return `You lost :( You picked ${player} and the computer picked ${comp}`;
+    }
+    else if ((player == "rock" && comp == "rock") || (player == "paper" && comp == "paper") || (player == "scissor" && comp == "scissor")){
+        return `It\'s a tie! You picked ${player} and the computer picked ${comp}`
+    }
+    else {
+        return `You won! You picked ${player} and the computer picked ${comp}`;
+    }
+}
+
 function playRound() {
     let  player = playerInitial();
 	let comp = computerPlay();
+    console.log(determineWinner(player, comp))
     if ( (player == "rock" && comp == "paper") || (player == "paper" && comp == "scissor") || (player == "scissor" && comp == "rock")){
         return "comp";
     }

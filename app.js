@@ -7,19 +7,6 @@ else if (choice === 1)
 else if (choice === 2)
     return 'scissor';
 }
-function playerInitial(){
-    let playerSelection = prompt("Enter rock, paper, or scissor: ");
-    playerSelection = playerSelection.toLowerCase();
-    let flag = false;
-    while (!flag){
-        if ((playerSelection === "rock") || (playerSelection === "paper") || (playerSelection === "scissor"))
-            flag = true;
-        else{
-            playerSelection = prompt("Please enter a valid option: rock, paper, or scissor: ");
-        }
-    }
-    return playerSelection;
-}
 
 function determineWinner(player, comp) {
     if ( (player == "rock" && comp == "paper") || (player == "paper" && comp == "scissor") || (player == "scissor" && comp == "rock")){
@@ -33,14 +20,13 @@ function determineWinner(player, comp) {
     }
 }
 
-function playRound() {
-    let  player = playerInitial();
+function playRound(playerSelection) {
 	let comp = computerPlay();
-    console.log(determineWinner(player, comp))
-    if ( (player == "rock" && comp == "paper") || (player == "paper" && comp == "scissor") || (player == "scissor" && comp == "rock")){
+    console.log(determineWinner(playerSelection, comp))
+    if ( (playerSelection == "rock" && comp == "paper") || (playerSelection == "paper" && comp == "scissor") || (playerSelection == "scissor" && comp == "rock")){
         return "comp";
     }
-    else if ((player == "rock" && comp == "rock") || (player == "paper" && comp == "paper") || (player == "scissor" && comp == "scissor")){
+    else if ((playerSelection == "rock" && comp == "rock") || (playerSelection == "paper" && comp == "paper") || (playerSelection == "scissor" && comp == "scissor")){
         return "tie";
     }
     else {
@@ -48,22 +34,38 @@ function playRound() {
     }
  }
 
-function game() {
-    let playerWins = 0;
-    let compWins = 0;
-    let ties = 0;
-    for (let i = 0; i < 5; i++){
-        let result = playRound();
-        if (result === "comp")
-            compWins++;
-        else if (result === "tie")
-            ties++;
-        else
-            playerWins++;
-    }
-    return `Player won ${playerWins} times, computer won ${compWins} times, and tied ${ties} times.`;
-}
+//function game() {
+//    let playerWins = 0;
+//    let compWins = 0;
+//    let ties = 0;
+//    for (let i = 0; i < 5; i++){
+//        let result = playRound();
+//        if (result === "comp")
+//            compWins++;
+//        else if (result === "tie")
+//            ties++;
+//        else
+//            playerWins++;
+//    }
+//    return `Player won ${playerWins} times, computer won ${compWins} times, and tied ${ties} times.`;
+//}
+//
+// console.log(game())
 
- console.log(game())
 
+const rockOption = document.querySelector('.rockOption');
+rockOption.addEventListener('click', () => {
+    let playerSelection = 'rock';
+    playRound(playerSelection);
+} )
+const paperOption = document.querySelector('.paperOption');
+paperOption.addEventListener('click', () => {
+    let playerSelection = 'paper';
+    playRound(playerSelection);
+} )
+const scissorOption = document.querySelector('.scissorOption');
+scissorOption.addEventListener('click', () => {
+    let playerSelection = 'scissor';
+    playRound(playerSelection);
+} )
 

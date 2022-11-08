@@ -1,3 +1,4 @@
+//These are the game logic functions
 function computerPlay(){
  let choice = Math.floor(Math.random()*3);
  if (choice === 0)
@@ -22,7 +23,7 @@ function determineWinner(player, comp) {
 
 function playRound(playerSelection) {
 	let comp = computerPlay();
-    console.log(determineWinner(playerSelection, comp))
+    displayResults.textContent = determineWinner(playerSelection, comp);
     if ( (playerSelection == "rock" && comp == "paper") || (playerSelection == "paper" && comp == "scissor") || (playerSelection == "scissor" && comp == "rock")){
         return "comp";
     }
@@ -33,6 +34,8 @@ function playRound(playerSelection) {
         return "player";
     }
  }
+//End of game logic functions
+
 
 //function game() {
 //    let playerWins = 0;
@@ -52,6 +55,7 @@ function playRound(playerSelection) {
 //
 // console.log(game())
 
+const displayResults = document.querySelector("#displayResults");
 
 const rockOption = document.querySelector('.rockOption');
 rockOption.addEventListener('click', () => {
@@ -68,4 +72,8 @@ scissorOption.addEventListener('click', () => {
     let playerSelection = 'scissor';
     playRound(playerSelection);
 } )
+
+
+
+
 

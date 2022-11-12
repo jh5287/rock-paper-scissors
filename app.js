@@ -23,55 +23,88 @@ function determineWinner(player, comp) {
 
 function playRound(playerSelection) {
 	let comp = computerPlay();
-    displayResults.textContent = determineWinner(playerSelection, comp);
+    let playResult = determineWinner(playerSelection, comp);
+    displayResults.textContent = playResult;
     if ( (playerSelection == "rock" && comp == "paper") || (playerSelection == "paper" && comp == "scissor") || (playerSelection == "scissor" && comp == "rock")){
-        return "comp";
+        return 'comp';
     }
     else if ((playerSelection == "rock" && comp == "rock") || (playerSelection == "paper" && comp == "paper") || (playerSelection == "scissor" && comp == "scissor")){
-        return "tie";
+        return 'tie';
     }
     else {
-        return "player";
+        return 'player';
     }
  }
 //End of game logic functions
 
 
-//function game() {
-//    let playerWins = 0;
-//    let compWins = 0;
-//    let ties = 0;
-//    for (let i = 0; i < 5; i++){
-//        let result = playRound();
-//        if (result === "comp")
-//            compWins++;
-//        else if (result === "tie")
-//            ties++;
-//        else
-//            playerWins++;
-//    }
-//    return `Player won ${playerWins} times, computer won ${compWins} times, and tied ${ties} times.`;
-//}
+const playGame = document.querySelector('.game');
+playGame.addEventListener('click', () => {
+    game();
+})
+
+function game(){
+const buttons = document.querySelector('.buttons');
+
+const rockBtn = document.createElement('button'); //add rock option
+rockBtn.classList.add('rockOption');
+rockBtn.textContent = 'Rock';
+buttons.appendChild(rockBtn);
+
+const paperBtn = document.createElement('button'); // add scissor option
+paperBtn.classList.add('paperOption');
+paperBtn.textContent = 'Paper';
+buttons.appendChild(paperBtn);
+
+const scissorBtn = document.createElement('button'); // add paper option
+scissorBtn.classList.add('scissorOption');
+scissorBtn.textContent = 'Scissor';
+buttons.appendChild(scissorBtn);
+
+buttons.removeChild(playGame); //remove the play game button   
+
+ //let playerWins = '0';
+ //let compWins = 0;
+ //let ties = 0;
 //
-// console.log(game())
+ //let playerScore = document.querySelector('.overallScore');
+ //playerScore.textContent = playerWins;
+ //const rockOption = document.querySelector('.rockOption');
+ //rockOption.addEventListener('click', () => {
+ //    let playerSelection = 'rock';
+ //    playRound(playerSelection);
+ //} )
+ //const paperOption = document.querySelector('.paperOption');
+ //paperOption.addEventListener('click', () => {
+ //    let playerSelection = 'paper';
+ //    playRound(playerSelection);
+ //} )
+ //const scissorOption = document.querySelector('.scissorOption');
+ //scissorOption.addEventListener('click', () => {
+ //    let playerSelection = 'scissor';
+ //    playRound(playerSelection);
+ //} )
+ //for (let i = 0; i < 5; i++){
+ //    let result = playRound(playerSelection);
+ //   if (result === "comp")
+ //       compWins++;
+ //   else if (result === "tie")
+ //       ties++;
+ //   else
+ //       playerWins++;
 
-const displayResults = document.querySelector("#displayResults");
+}
 
-const rockOption = document.querySelector('.rockOption');
-rockOption.addEventListener('click', () => {
-    let playerSelection = 'rock';
-    playRound(playerSelection);
-} )
-const paperOption = document.querySelector('.paperOption');
-paperOption.addEventListener('click', () => {
-    let playerSelection = 'paper';
-    playRound(playerSelection);
-} )
-const scissorOption = document.querySelector('.scissorOption');
-scissorOption.addEventListener('click', () => {
-    let playerSelection = 'scissor';
-    playRound(playerSelection);
-} )
+
+  //  playerScore.textContent = playerWins;
+  //  compScore.textContent = compWins;
+   // return `Player won ${playerWins} times, computer won ${compWins} times, and tied ${ties} times.`;
+
+
+
+//const displayResults = document.querySelector(".score");
+
+
 
 
 

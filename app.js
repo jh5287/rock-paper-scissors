@@ -33,6 +33,9 @@ function playRound(playerSelection) {
         let r = parseInt(result);
         r++;
         container.textContent = r;
+        if (container.textContent == "5"){
+            displayWinner();
+        }
     }
     else if ((playerSelection == "rock" && comp == "rock") || (playerSelection == "paper" && comp == "paper") || (playerSelection == "scissor" && comp == "scissor")){
         return 'tie';
@@ -43,6 +46,9 @@ function playRound(playerSelection) {
         let r = parseInt(result);
         r++;
         container.textContent = r;
+        if (container.textContent == "5"){
+            displayWinner();
+        }
     }
  }
 //End of game logic functions
@@ -99,11 +105,14 @@ buttons.removeChild(playGame); //remove the play game button
  } )
 
 }
-function determineFinalWinner(playerWins, compWins){
-    if (playerWins == 5){
-        return "Player wins!";
+function displayWinner(){
+    const buttons = document.querySelector('.buttons');
+    while (buttons.firstChild){
+        buttons.removeChild(buttons.firstChild);
     }
-    if (compWins == 5){
-        return "Computer wins!";
-    }
+    let displayFinal = document.createElement('div');
+    displayFinal.classList.add('finalResults');
+    displayFinal.textContent = "We have a winner!";
+    const displayResults = document.querySelector('.displayResults');
+    displayResults.appendChild(displayFinal);
 }

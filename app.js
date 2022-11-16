@@ -21,21 +21,28 @@ function determineWinner(player, comp) {
     }
 }
 
-function playRound(playerSelection, playerWins, compWins) {
+function playRound(playerSelection) {
 	let comp = computerPlay();
     let playResult = determineWinner(playerSelection, comp);
     const displayResults = document.querySelector(".result");
     displayResults.textContent = playResult;
     if ( (playerSelection == "rock" && comp == "paper") || (playerSelection == "paper" && comp == "scissor") || (playerSelection == "scissor" && comp == "rock")){
-        console.log(compWins);
-        updateCompScore(compWins);
+        
+        let container = document.querySelector('.compScore');
+        let result = container.textContent;
+        let r = parseInt(result);
+        r++;
+        container.textContent = r;
     }
     else if ((playerSelection == "rock" && comp == "rock") || (playerSelection == "paper" && comp == "paper") || (playerSelection == "scissor" && comp == "scissor")){
         return 'tie';
     }
     else {
-        console.log(playerWins);
-        updatePlayerScore(playerWins);
+        let container = document.querySelector('.playerScore');
+        let result = container.textContent;
+        let r = parseInt(result);
+        r++;
+        container.textContent = r;
     }
  }
 //End of game logic functions
@@ -78,17 +85,17 @@ buttons.removeChild(playGame); //remove the play game button
  const rockOption = document.querySelector('.rockOption');
  rockOption.addEventListener('click', () => {
      let playerSelection = 'rock';
-     playRound(playerSelection, playerWins, compWins);
+     playRound(playerSelection);
  } )
  const paperOption = document.querySelector('.paperOption');
  paperOption.addEventListener('click', () => {
      let playerSelection = 'paper';
-     playRound(playerSelection, playerWins, compWins);
+     playRound(playerSelection);
  } )
  const scissorOption = document.querySelector('.scissorOption');
  scissorOption.addEventListener('click', () => {
      let playerSelection = 'scissor';
-     playRound(playerSelection, playerWins, compWins);
+     playRound(playerSelection);
  } )
 
 }
@@ -100,29 +107,3 @@ function determineFinalWinner(playerWins, compWins){
         return "Computer wins!";
     }
 }
-function updatePlayerScore(playerWins){
-    playerWins = playerWins + 1;
-    let playerScore = document.querySelector('.playerScore');
-    playerScore.textContent = playerWins;
-    console.log("player score updated");
-}
-
-function updateCompScore(compWins){
-    compWins = compWins + 1;
-    let compScore = document.querySelector('.compScore');
-    compScore.textContent = compWins;
-    console.log("comp score updated");
-}
-  //  compScore.textContent = compWins;
-   // return `Player won ${playerWins} times, computer won ${compWins} times, and tied ${ties} times.`;
-
-
-
-//const displayResults = document.querySelector(".score");
-
-
-
-
-
-
-

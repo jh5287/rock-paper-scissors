@@ -29,12 +29,10 @@ function playRound(playerSelection) {
     if ( (playerSelection == "rock" && comp == "paper") || (playerSelection == "paper" && comp == "scissor") || (playerSelection == "scissor" && comp == "rock")){
         
         let container = document.querySelector('.compScore');
-        let result = container.textContent;
-        let r = parseInt(result);
-        r++;
-        container.textContent = r;
-        if (container.textContent == "5"){
-            displayWinner();
+        compWins++;
+        container.textContent = "Computer: " + compWins;
+        if (compWins == 5){
+            displayWinner("Computer");
         }
     }
     else if ((playerSelection == "rock" && comp == "rock") || (playerSelection == "paper" && comp == "paper") || (playerSelection == "scissor" && comp == "scissor")){
@@ -42,26 +40,40 @@ function playRound(playerSelection) {
     }
     else {
         let container = document.querySelector('.playerScore');
-        let result = container.textContent;
-        let r = parseInt(result);
-        r++;
-        container.textContent = r;
-        if (container.textContent == "5"){
-            displayWinner();
+        playerWins++;
+        container.textContent = "Player: " + playerWins;
+        if (playerWins == 5){
+            displayWinner("Player");
         }
     }
  }
 //End of game logic functions
+const buttons = document.querySelector('.buttons');
 
-
-const playGame = document.querySelector('.game');
-playGame.addEventListener('click', () => {
+const playBtn = document.createElement('button'); 
+playBtn.classList.add('playBtn');
+playBtn.textContent = 'Play game';
+buttons.appendChild(playBtn);
+playBtn.addEventListener('click', () => {
     game();
 })
 let playerWins = 0;
  let compWins = 0;
+
 function game(){
-const buttons = document.querySelector('.buttons');
+if (playerWins > 0 || compWins > 0){
+    playerWins = 0;
+    let container1 = document.querySelector('.playerScore');
+    container1.textContent = "Player: " + playerWins;
+    compWins = 0;
+    let container2 = document.querySelector('.compScore');
+    container2.textContent = "Computer: " + compWins;
+    let container3 = document.querySelector('.result');
+    container3.textContent = " ";
+    let displayResults = document.querySelector('.displayResults');
+    let displayFinal = document.querySelector('.finalResults');
+    displayResults.removeChild(displayFinal);
+}
 
 const rockBtn = document.createElement('button'); //add rock option
 rockBtn.classList.add('rockOption');
@@ -78,7 +90,7 @@ scissorBtn.classList.add('scissorOption');
 scissorBtn.textContent = 'Scissor';
 buttons.appendChild(scissorBtn);
 
-buttons.removeChild(playGame); //remove the play game button   
+buttons.removeChild(playBtn); //remove the play game button   
 
  
 
@@ -86,8 +98,8 @@ buttons.removeChild(playGame); //remove the play game button
 
  let playerScore = document.querySelector('.playerScore');
  let compScore = document.querySelector('.compScore');
- compScore.textContent = compWins;
- playerScore.textContent = playerWins;
+ compScore.textContent = "Computer: " + compWins;
+ playerScore.textContent = "Player: " + playerWins;
  const rockOption = document.querySelector('.rockOption');
  rockOption.addEventListener('click', () => {
      let playerSelection = 'rock';
@@ -105,14 +117,16 @@ buttons.removeChild(playGame); //remove the play game button
  } )
 
 }
-function displayWinner(){
-    const buttons = document.querySelector('.buttons');
+function displayWinner(winner){
     while (buttons.firstChild){
         buttons.removeChild(buttons.firstChild);
     }
     let displayFinal = document.createElement('div');
     displayFinal.classList.add('finalResults');
-    displayFinal.textContent = "We have a winner!";
-    const displayResults = document.querySelector('.displayResults');
+    displayFinal.textContent = "The " + winner + " is the winner!";
+    let displayResults = document.querySelector('.displayResults');
     displayResults.appendChild(displayFinal);
+    playBtn.textContent = "Play again?";
+    buttons.appendChild(playBtn);
+    
 }
